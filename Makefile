@@ -2,7 +2,11 @@
 
 .c.o:
 	gcc -c $<
+lib%.a: %.o
+	ar rs $@ $^
 	
+lib%.so: %.o
+	gcc -shared -o $@ $^
 test1: kwadrat.h szescian.h objetosc.o pole.o wyswietl_boki_K.o wyswietl_boki_S.o mein.c lib1.a temp lib2.so
 	gcc -c objetosc.c pole.c wyswietl_boki_K.c wyswietl_boki_S.c
 	gcc -Wall -ansi -pedantic objetosc.c pole.c wyswietl_boki_K.c wyswietl_boki_S.c mein.c -o test
